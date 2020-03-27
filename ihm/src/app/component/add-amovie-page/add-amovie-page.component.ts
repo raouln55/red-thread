@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MovieService } from '../../service/movie.service';
 import { MovieBuffService } from '../../service/movieBuff.service';
 import { MovieBuff } from '../../model/moviebuff';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-amovie-page',
@@ -18,7 +19,9 @@ export class AddAMoviePageComponent implements OnInit {
   addAMovieForm;
   displayedColumns: any[] = ['add', 'title', 'released', 'idImdb', 'posterUrl'];
   dataSource = new MatTableDataSource<Movie>();
+
   public currentMovieBuff: MovieBuff;
+  public searchLaunch = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -27,6 +30,7 @@ export class AddAMoviePageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private movieService: MovieService,
     private movieBuffService: MovieBuffService,
+    private router: Router
   ) {
     this.addAMovieForm = this.formBuilder.group({
       movie_title: '',
@@ -38,8 +42,6 @@ export class AddAMoviePageComponent implements OnInit {
     this.movieBuffService.getCurrentMovieBuff().subscribe(
       movieBuff => {
         this.currentMovieBuff = movieBuff;
-        console.log('Utilisateur : Id n°' + movieBuff.idMovieBuff + '--> ' + movieBuff.firstName + ' ' + movieBuff.lastName);
-        console.log(movieBuff.moviesSeen);
       }
     );
   }
@@ -47,12 +49,14 @@ export class AddAMoviePageComponent implements OnInit {
   onSubmit(addAMovieForm) {
     if (addAMovieForm.movie_title === '') {
       alert('Veuillez entrer un titre de film');
+    } else {
+      this.searchLaunch = true;
+      this.movieService.getMoviesByKeyword(addAMovieForm.movie_title).subscribe(movieSearch => {
+        this.dataSource.data = movieSearch;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
     }
-    this.movieService.getMoviesByKeyword(addAMovieForm.movie_title).subscribe(movieSearch => {
-      this.dataSource.data = movieSearch;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
   }
 
   addAmovie(movie: Movie) {
@@ -61,6 +65,7 @@ export class AddAMoviePageComponent implements OnInit {
       this.movieBuffService.updateMovieBuff(this.currentMovieBuff).subscribe(
         movieBuffUpdated => {
           this.currentMovieBuff = movieBuffUpdated;
+          this.router.navigate(['/movies']);
         }
       );
     });
