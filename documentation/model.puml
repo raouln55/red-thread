@@ -1,0 +1,131 @@
+Description :
+- un film contient un ou plusieurs acteurs
+- un film a un ou plusieurs genre
+- un film peut avoir un ou plusieurs avis
+
+
+  un cinéphile peut ajouter un film vu
+  un film a un ou plusieurs 
+
+- un cinéphile peut ajouter un film vu
+- un cinéphile peut poster **un seul** avis sur un film
+- un cinéphile peut se connecter depuis un ou plusieurs connexions
+- 
+
+@startuml mcd
+title MCD
+
+class Movie
+enum Genre
+enum Rate
+class Actor
+class MovieBuff
+class Connexion
+class Opinion
+
+Movie                 "0..n" -- "1..n"     Genre : a
+Movie                 "0..n" -- "1..n"     Actor : a
+Movie                 "1"    -- "0..n"     Opinion : a
+Movie                 "0..n" -- "1"        Rate : est classé
+MovieBuff             "1"    -- "1..n"     Connexion : utilise
+MovieBuff             "1"    -- "0..n"     Movie : a vu
+
+@enduml
+
+@startuml
+title MLD
+
+note as Correspondence
+  |= Object     |= theMovieDB   |= OmDB       |
+  | idMovie     | imdb_id       | imdbID      |
+  | title       | title (fr)    | Title       |
+  | director    | ???           | Director    |
+  | released    | release_date  | Released    |
+  | runtime     | runtime       | Runtime     |
+  | genres      | genres        | Genre       |
+  | actors      | ???           | Actors      |
+  | plot        | overview (fr) | Plot (en)   |
+  | imdbRating  | ???           | imdbRating  |
+  | imdbVote    | ???           | imdbVotes   |
+end note
+
+Movie                 "0..n" -- "1..n"     Genre : a
+Movie                 "0..n" -- "1..n"     Actor : a
+Movie                 "1"    -- "0..n"     Opinion : a
+Movie                 "0..n" -- "1"        Rate : est classé
+MovieBuff             "1"    -- "1..n"     Connexion : utilise
+MovieBuff             "1"    -- "0..n"     Movie : a vu
+
+class Movie {
+  idMovie: Integer
+  title: String
+  director: String
+  released: Date
+  runtime: Integer
+  genres: Genre[]
+  actors: Actor[]
+  plot: String
+  imdbRating: Float
+  imdbVote: integer
+  rated: Rate
+  opinions: Opinion[]
+
+  getMovieFromOmdbById(imdbId: String)
+  getMovieFromOmdbByName(name: String)
+}
+
+enum Genre {
+  [
+    "Action",
+    "Adventure",
+    "Crime",
+    "Drama",
+    "Fantasy",
+    "Mystery",
+    "Sci-Fi",
+    "Thriller",
+    ...
+  ]
+}
+
+enum Rate {
+  [
+    "G",
+    "PG",
+    "PG-13",
+    "R",
+    "NC-17"
+  ]
+}
+
+class Actor {
+  idActor: Integer
+  firstName: String
+  lastName: String
+}
+
+class MovieBuff {
+  idMovieBuff: Integer
+  firstName: String
+  lastName: String
+  connections: Connection[] 
+  moviesSeen: Movie[]
+
+  createMovieBuff()
+
+}
+
+class Connection {
+  idConnexion: Integer
+  provider: String
+  login: String
+}
+
+class Opinion {
+  idOpinion: Long
+  idMovieBuff: Integer
+  rating: Integer
+  comment: String
+}
+
+@enduml

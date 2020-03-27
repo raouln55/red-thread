@@ -1,0 +1,28 @@
+<h2>Under construction !</h2>
+<div>
+    <label for="director">Réalisateur : </label>
+    <input type="text" id="director" formControlName="director">
+</div>
+
+<section id="table-view">
+    <table aria-describedby="Liste des réalisateurs">
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Réalisateur</th>
+                <th scope="col">Acteurs</th>
+                <th scope="col">Genres</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let item of movies; let i = index">
+            <td><a [routerLink]="['/movie', item.idImdb]">{{item.title}}</a></td>
+            <td><a [routerLink]="['/director', 1]">{{item.director}}</a></td>
+            <td>{{item.actors}}</td>
+            <td>{{item.genres}}</td>
+        </tr>
+    </table>
+</section>
+
+<div>
+    <button class="button" type="submit" [routerLink]="['/movies']">Retour</button>
+</div>

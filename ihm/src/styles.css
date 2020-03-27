@@ -1,0 +1,64 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/*----------------CSS POLICES CUSTOMISEES----------------*/
+/*-------------------------------------------------------*/
+
+@font-face {
+  font-family: "MovieStack_Font";
+  src: url('/assets/Action Comics.ttf');
+  font-style: normal;
+}
+/*-------------------------------------------------------*/
+/*-------------------------------------------------------*/
+
+
+
+/*----------------CSS DE L'APP-ROOT----------------*/
+/*-------------------------------------------------*/
+
+app-root {
+  flex: 1 0 auto;
+  position: relative;
+  flex-direction: column;
+}
+/*-------------------------------------------------*/
+/*-------------------------------------------------*/
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 99%;
+  margin: 0;
+  padding: 0 0 70px 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+    cursor: pointer;
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+a:hover {
+  opacity: 0.8;
+}
+
+
+
+html, body {
+  height: 99%;
+  /*background: url('/assets/wallPaper.jpg') center no-repeat;  !*LIGNES QUI PEUVENT ETRE DESACTIVEES SI L'IMAGE DE FOND GENE*!*/
+  /*background-size: contain                                    !*LIGNES QUI PEUVENT ETRE DESACTIVEES SI L'IMAGE DE FOND GENE*!;*/
+}
+
+body {
+  display: flex;
+}
+
+ul li {
+  text-align: justify;
+}
+
