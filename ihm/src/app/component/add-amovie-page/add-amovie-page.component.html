@@ -16,15 +16,15 @@
         <input id="title" type="text" formControlName="movie_title" placeholder="Tapez le titre...">
       </div>
 
-<!--      ###################################################################################################      -->
-<!--      ### FUTURE FEATURE### - Possibilité d'ajouter l'année de sortie du film comme critère de recherche       -->
-<!--      ###################################################################################################      -->
-<!--      <div class="released">-->
-<!--        <label for="released"><h2>Année de sortie du film</h2></label>-->
-<!--        <input id="released" type="text" formControlName="movie_released" placeholder="Tapez l'année...">-->
-<!--      </div>-->
-<!--      ###################################################################################################      -->
-<!--      ###################################################################################################      -->
+      <!--      ###################################################################################################      -->
+      <!--      ### FUTURE FEATURE### - Possibilité d'ajouter l'année de sortie du film comme critère de recherche       -->
+      <!--      ###################################################################################################      -->
+      <!--      <div class="released">-->
+      <!--        <label for="released"><h2>Année de sortie du film</h2></label>-->
+      <!--        <input id="released" type="text" formControlName="movie_released" placeholder="Tapez l'année...">-->
+      <!--      </div>-->
+      <!--      ###################################################################################################      -->
+      <!--      ###################################################################################################      -->
 
     </div>
 
@@ -35,10 +35,19 @@
   </form>
 </section>
 
-<section *ngIf="searchLaunch; else noSearch" >
-  <div id="scrollable_table">
-    <mat-table *ngIf="dataSource.data.length > 0; else noData" [dataSource]="dataSource" matSort class="mat-elevation-z5">
+<section *ngIf="searchLaunch == 'no'">
+  <h3>Veuillez indiquez vos critères de recherches et cliquez sur Chercher.</h3>
+</section>
+<section *ngIf="searchLaunch == 'inProgress'">
+  <h3>La recherche est en cours !</h3>
+</section>
+<section *ngIf="searchLaunch == 'finished' && !hasData">
+  <h3>Pas de films trouvés avec ces critères ...</h3>
+</section>
 
+<section>
+  <div id="scrollable_table">
+    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z5">
       <ng-container matColumnDef="add">
         <mat-header-cell class="mat_header" *matHeaderCellDef mat-sort-header></mat-header-cell>
         <mat-cell *matCellDef="let movie">
@@ -53,7 +62,7 @@
 
       <ng-container matColumnDef="released">
         <mat-header-cell  class="mat_header" *matHeaderCellDef mat-sort-header> Année </mat-header-cell>
-        <mat-cell *matCellDef="let movie"> {{ movie.released | date:'yyyy':'fr-FR'}} </mat-cell>
+        <mat-cell *matCellDef="let movie"> {{ movie.released | date:'yyyy':'fr-FR' }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="idImdb">
@@ -64,7 +73,7 @@
       <ng-container matColumnDef="posterUrl">
         <mat-header-cell  class="mat_header" *matHeaderCellDef> Poster </mat-header-cell>
         <mat-cell id="add_movie" *matCellDef="let movie">
-          <img class="poster" src="{{ movie.posterUrl }}" alt="Affiche du film {{movie.title}}">
+          <img class="poster" src="{{ movie.posterUrl }}" title="Affiche du film {{ movie.title }}">
         </mat-cell>
       </ng-container>
 
@@ -72,14 +81,7 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
-    <ng-template #noData>
-      Pas de films trouvés avec ces critères ...
-    </ng-template>
-
   </div>
-  <mat-paginator [length]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-</section>
 
-<ng-template #noSearch>
-  Veuillez indiquez vos critères de recherches et cliquez sur Chercher.
-</ng-template>
+  <mat-paginator *ngIf="hasData" [length]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+</section>
