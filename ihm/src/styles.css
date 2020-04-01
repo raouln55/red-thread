@@ -50,8 +50,8 @@ a:hover {
 
 html, body {
   height: 99%;
-  /*background: url('/assets/wallPaper.jpg') center no-repeat;  !*LIGNES QUI PEUVENT ETRE DESACTIVEES SI L'IMAGE DE FOND GENE*!*/
-  /*background-size: contain                                    !*LIGNES QUI PEUVENT ETRE DESACTIVEES SI L'IMAGE DE FOND GENE*!;*/
+  background: url('/assets/Asset 2-100(1).jpg') center repeat;  /*LIGNES QUI PEUVENT ETRE DESACTIVEES SI L'IMAGE DE FOND GENE*/
+  background-size: auto                                    /*LIGNES QUI PEUVENT ETRE DESACTIVEES SI L'IMAGE DE FOND GENE*/;
 }
 
 body {
