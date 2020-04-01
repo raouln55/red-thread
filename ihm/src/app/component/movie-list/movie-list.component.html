@@ -14,23 +14,24 @@
 </div>
 
 <section>
-  <mat-table [dataSource]="dataSource" matSort aria-describedby="Liste des films">
+  <div id="scrollable_table">
+  <mat-table [dataSource]="dataSource" matSort aria-describedby="Liste des films" matSort class="mat-elevation-z5">
 
     <!-- Title -->
     <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Titre</mat-header-cell>
-      <mat-cell *matCellDef="let item"><mat-icon [routerLink]="['/movie', item.idImdb]">zoom_in</mat-icon>{{item.title}}</mat-cell>
+      <mat-header-cell class="mat_header" *matHeaderCellDef mat-sort-header>Titre</mat-header-cell>
+      <mat-cell *matCellDef="let item"><mat-icon [routerLink]="['/movie', item.idImdb]">zoom_in</mat-icon>  {{ item.title }}</mat-cell>
     </ng-container>
 
     <!-- Director -->
     <ng-container matColumnDef="director">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Réalisateur</mat-header-cell>
-      <mat-cell *matCellDef="let item"><mat-icon [routerLink]="['/director', 1]">zoom_in</mat-icon>{{item.director}}</mat-cell>
+      <mat-header-cell class="mat_header" *matHeaderCellDef mat-sort-header>Réalisateur</mat-header-cell>
+      <mat-cell *matCellDef="let item"><mat-icon [routerLink]="['/director', 1]">zoom_in</mat-icon>  {{ item.director }}</mat-cell>
     </ng-container>
 
     <!-- Actors -->
     <ng-container matColumnDef="actors">
-      <mat-header-cell *matHeaderCellDef> Acteurs </mat-header-cell>
+      <mat-header-cell class="mat_header" *matHeaderCellDef> Acteurs </mat-header-cell>
       <mat-cell *matCellDef="let item" class="cellActors">
       <span *ngFor="let actor of item.actors; let i=index" class="cellActor">
         <span *ngIf="(item.actors)?.length <= maxActor; else elseGreaterThan">
@@ -55,7 +56,7 @@
 
     <!-- Genres -->
     <ng-container matColumnDef="genres">
-      <mat-header-cell *matHeaderCellDef>Genres</mat-header-cell>
+      <mat-header-cell class="mat_header" *matHeaderCellDef>Genres</mat-header-cell>
       <mat-cell *matCellDef="let item" class="cellGenres">
       <span *ngFor="let genre of item.genres; let i=index" class="cellGenre">
         <span *ngIf="(item.genres)?.length <= maxGenre; else elseGreaterThan">
@@ -81,6 +82,7 @@
     <mat-header-row *matHeaderRowDef="moviesColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: moviesColumns"></mat-row>
   </mat-table>
+  </div>
 
   <mat-paginator [length]="dataSource.data.length" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
 </section>

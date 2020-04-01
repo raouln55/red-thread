@@ -71,7 +71,7 @@ mat-header-cell:first-of-type, mat-cell:first-of-type {
 #scrollable_table {
   scroll-behavior: smooth;
   /*height: 605px;*/
-  height: 36vw;
+  height: 33vw;
   overflow: auto;
 }
 

@@ -74,3 +74,29 @@ mat-paginator {
   flex-direction: column;
   align-items: center;
 }
+
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-table {
+  /*width: 1400px;*/
+  width: 83vw;
+}
+
+.mat_header {
+  font-size: medium;
+  font-weight: bold;
+}
+
+#scrollable_table {
+  scroll-behavior: smooth;
+  /*height: 605px;*/
+  height: 41vw;
+  overflow: auto;
+}
+
+
