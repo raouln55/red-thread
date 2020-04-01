@@ -66,7 +66,7 @@ public class Movie {
     @Column()
     private Integer runtime;
 
-    @Column(length = 700)
+    @Column(length = 2000)
     private String plot;
 
     @Column()

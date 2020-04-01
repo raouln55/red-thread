@@ -283,7 +283,7 @@ public class MovieServiceImpl implements MovieService {
         this.args.put("keyword", keyword);
 
         List<Movie> moviesSearch = new ArrayList<>();
-        int maxSearch = 5;
+        int maxSearch = 10;
 
         try {
             String movieImdb =  this.restTemplate.getForObject(
