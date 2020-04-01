@@ -30,11 +30,12 @@ padding: 0;
 #contentSheet {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   height: 100%;
 }
 
 #poster {
-  max-width: 29vw;
+  max-width: 28vw;
   margin: 5px;
 }
 

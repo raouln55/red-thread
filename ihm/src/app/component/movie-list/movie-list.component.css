@@ -99,4 +99,18 @@ mat-table {
   overflow: auto;
 }
 
+mat-header-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cellGenres {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 
